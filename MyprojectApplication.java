@@ -15,7 +15,8 @@ public class MyprojectApplication extends Application {
 
 	@Override
 	public void init() {
-		Window mainWindow = new Window("Myproject Application");
+		Window mainWindow = new Window("Myproject Vaadin Application");
+		/*
 		Label label = new Label("Hello Vaadin user");
 		mainWindow.addComponent(label);
 		mainWindow.addComponent(
@@ -34,12 +35,39 @@ public class MyprojectApplication extends Application {
 				// TODO Auto-generated method stub
 				button.setCaption("You push it");
 				if(button.getCaption()=="You push it")
-					mainWindow.showNotification("You pushed");
+					mainWindow.showNotification("You push");
+				
 			}
 		});
 		mainWindow.addComponent(button);
 		
+		Window mywindow=new Window("My Window");
+		Button  close = new Button("close");
+		close.addListener(new Button.ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				mainWindow.removeWindow(mywindow);
+			}
+		});
+		mywindow.addComponent(close);
+		mainWindow.addWindow(mywindow);
+		*/
 		setMainWindow(mainWindow);
+		mainWindow.addComponent(new WindowOpener("Window Opener", mainWindow));
+		
+		Button closeButton = new Button();
+		closeButton.addListener(new Button.ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				// TODO Auto-generated method stub
+				getMainWindow().getApplication().close();
+				setLogoutURL("/test");
+			}
+		});
+		mainWindow.addComponent(closeButton);
 	}
 
 }
